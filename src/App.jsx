@@ -1,12 +1,11 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+// IMPOROT IL LINK DI BOOTSRAP
 // import "bootstrap/dist/css/bootstrap.min.css";
+// IMPORTO L'ARRAY DI TASKS
 import tasks from "./data/menu";
 // importo taskinprogress
 function App() {
-  function tasksInprogresseBacklog() {
+  // Current tasks
+  function currentTasks() {
     // un array per le tasks in progress
     let tasksInprogress = tasks
       .filter((element) => element.state === "in_progress")
@@ -40,14 +39,6 @@ function App() {
 
     return ledueTasks;
   }
-  // Prendo la lungezza del array degli tasks in progress & in backlog
-  function tasksInprogresseBacklogLength() {
-    return tasksInprogresseBacklog().length;
-  }
-  // prendo la lunguezza degli tasks completed
-  function taskscompletedLength() {
-    return tasksCompleted().length;
-  }
   // tasks completed
   function tasksCompleted() {
     let tasksCompleted = tasks
@@ -67,19 +58,29 @@ function App() {
 
     return tasksCompleted;
   }
+  // Prendo la lungezza del array degli tasks in progress & in backlog
+  function currentTasksLength() {
+    return currentTasks().length;
+  }
+  // prendo la lunguezza degli tasks completed
+  function taskscompletedLength() {
+    return tasksCompleted().length;
+  }
 
   return (
     <>
+      {/* header */}
       <header>
         <h1>Task manager</h1>
       </header>
+      {/* Main */}
       <main>
         {/* tasks in progress */}
-        <h3>Completed tasks ({tasksInprogresseBacklogLength()}) </h3>
-        <ul> {tasksInprogresseBacklog()} </ul>
+        <h3>Current tasks ({currentTasksLength()}) </h3>
+        <ul> {currentTasks()} </ul>
         <hr />
         {/* tasks completed */}
-        <h3> Current tasks ({taskscompletedLength()}) </h3>
+        <h3> Completed tasks ({taskscompletedLength()}) </h3>
         <ul>{tasksCompleted()}</ul>
       </main>
     </>
